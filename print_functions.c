@@ -37,13 +37,13 @@ int print_c(va_list arg_list, char *buffer)
 }
 
 /**
- * print_d - prints an integer
+ * print_d_i - prints an integer
  * @arg_list: points to the integer to be printed
  * @buffer: buffer to store the integer to be printed
  *
  * Return: number of characters stored in @buffer
  */
-void print_d_i(va_list arg_list)
+int print_d_i(va_list arg_list, char *buffer)
 {
 	int d, copy_d, digits = 1;
 
@@ -84,7 +84,7 @@ void print_d_i(va_list arg_list)
  *
  * Return: number of characters in @buffer
  */
-void print_s(va_list arg_list)
+int print_s(va_list arg_list, char *buffer)
 {
 	char *string;
 	char *null = "(null)";
