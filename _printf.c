@@ -5,49 +5,31 @@
  * @format: character string that describes how the argument
  *          should be printed
  *
- * Return: number of characters written
+ * Return: number of chearcters printed
  */
 int _printf(const char *format, ...)
 {
-	int written = 0,(*structype)(char *, va_list);
-	char q{3};
-	var_list pa;
+	int index, ret_value = 0;
+	va_list args;
 
-	if (format == NULL)
-		return (-1);
-	q{2} = '\0';
-	va_start(pa, format);
-	_putchar(-1);
-	while (format[0])
+	va_start(args, format);
+
+	for (index = 0; *(format + index) != '\0'; index++)
 	{
-		if (format[0] == '%')
+		if (*(format + index) == '%')
 		{
-			structype = driver(format);
-			if (structype)
-			{
-				q[0] = '%';
-				q[1] = format[1];
-				written += structype(q, pa);
-			}
-			else if (format[1] != '\0')
-			{
-				written += _putchar('%);
-				written += _putchar(format[1]);
-			}
-			else
-			{
-				written += _putchar('%');
-				break;
-			}
-			format += 2;
+			index++;
 
+			if (*(format + index) != '%')
+			{
+				converter(format + index)(args);
+				continue;
+			}
 		}
-		else
-		{
-			written += _putchar(format[0]);
-			format++;
-		}
+
+		write(1, (format + index), 1);
+		ret_value++;
 	}
-	_putchar(-2);
-	return (written);
+
+	return (ret_value);
 }
