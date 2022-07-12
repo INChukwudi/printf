@@ -13,11 +13,14 @@ void (*converter(const char *symbol))(va_list list)
 		{"c", print_c},
 		{"s", print_s},
 		{"d", print_d},
-		{"i", print_i}
+		{"i", print_i},
+		{NULL, NULL}
 	};
-	int i;
+	int i, max;
 
-	for (i = 0; i < 4; i++)
+	i = 0, max = sizeof(func)/sizeof(func[0]);
+
+	for (; i < max; ++i)
 	{
 		if (*symbol == *(func[i].symbol))
 			return (func[i].f);

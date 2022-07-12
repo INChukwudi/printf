@@ -36,6 +36,11 @@ void print_c(va_list arg_list)
 	char ch;
 
 	ch = va_arg(arg_list, int);
+
+	if (!ch)
+	{
+		exit(1);
+	}
 	write(1, &ch, 1);
 }
 
@@ -79,6 +84,9 @@ void print_s(va_list arg_list)
 	int index;
 
 	string = va_arg(arg_list, char *);
+
+	if (!string)
+		exit(2);
 
 	for (index = 0; *(string + index); index++)
 		write(1, (string + index), 1);
