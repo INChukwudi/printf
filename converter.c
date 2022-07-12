@@ -19,7 +19,7 @@ int (*converter(const char *symbol))(va_list list, char *buffer)
 	};
 	int i;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 6; i++)
 	{
 		if (*symbol == *(func[i].symbol))
 			return (func[i].f);
