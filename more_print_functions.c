@@ -23,7 +23,7 @@ int print_percent(va_list __attribute__((__unused__)) arg_list, char *buffer)
  */
 int print_r(va_list arg_list, char *buffer)
 {
-	int end, length, index;
+	int end, length = 0, index;
 	char *rev;
 	char *null = "(null)";
 
@@ -38,7 +38,6 @@ int print_r(va_list arg_list, char *buffer)
 		return (6);
 	}
 
-	length = 0;
 	while (rev[length] != '\0')
 		length++;
 
@@ -46,6 +45,55 @@ int print_r(va_list arg_list, char *buffer)
 	{
 		*buffer = rev[end];
 		buffer++;
+	}
+	return (length);
+}
+
+/**
+ * print_r_13 - prints the rot13'ed string
+ * @arg_list: points to the string to be printed
+ * @buffer: buffer storing the rot13'ed string
+ *
+ * Return: number of cahracters in @buffer
+ */
+int print_r_13(va_list arg_list, char *buffer)
+{
+	char *alpha, *rot13_alpha, *ch;
+	char *null = "(null)";
+	int i, j, length = 0;
+
+	ch = va_arg(arg_list, char *);
+	if (ch == NULL)
+	{
+		for (i = 0; *(null + i); i++)
+		{
+			*buffer++ = *(null + i);
+		}
+		return (6);
+	}
+	alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	rot13_alpha = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	for (i = 0; ch[i] != '\0'; i++)
+	{
+		if (ch[i] == ' ')
+		{
+			*buffer++ = ' ';
+			length++;
+			continue;
+		}
+		for (j = 0; alpha[j] != '\0'; j++)
+		{
+			if (ch[i] == alpha[j])
+			{
+				*buffer++ = rot13_alpha[j];
+				break;
+			}
+			if (alpha[j] == 'Z')
+			{
+				*buffer++ = ch[i];
+			}
+		}
+		length++;
 	}
 	return (length);
 }
