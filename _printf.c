@@ -2,7 +2,7 @@
 
 /**
  * _printf - produces output according to a format
- * @format: character that describes how arg be printed
+ * @format: character that describes how the arg be printed
  *
  * Return: number of chearcters printed
  */

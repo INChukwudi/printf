@@ -3,154 +3,83 @@
 /**
  * print_number - prints an integer
  * @n: integer to printed
- * @buffer: buffer to store the character
  *
  * Return: void
  */
-void print_number(int n, char *buffer)
+void print_number(int n)
 {
-	int num = n;
+	unsigned int num = n;
+	char negative = '-';
+	char digit;
+
+	if (n < 0)
+	{
+		write(1, &negative, 1);
+		num = -num;
+	}
 
 	if ((num / 10) > 0)
-		print_number((num / 10), buffer - 1);
+		print_number(num / 10);
 
-	*buffer = (num % 10) + '0';
+	digit = (num % 10) + '0';
+	write(1, &digit, 1);
 }
 
 /**
  * print_c - prints a char to stdout
  * @arg_list: points to the char to be printed
- * @buffer: buffer to store the char
  *
- * Return: always 1
+ * Return: void
  */
-int print_c(va_list arg_list, char *buffer)
+void print_c(va_list arg_list)
 {
-	unsigned char ch;
+	char ch;
 
 	ch = va_arg(arg_list, int);
-	if (ch == '\0')
-		return (1);
-
-	*buffer = ch;
-	return (1);
+	write(1, &ch, 1);
 }
 
 /**
  * print_d - prints an integer
  * @arg_list: points to the integer to be printed
- * @buffer: buffer to store the integer to be printed
  *
- * Return: the number of characters stored in @buffer
+ * Return: void
  */
-int print_d(va_list arg_list, char *buffer)
+void print_d(va_list arg_list)
 {
-	int d, copy_d, digits = 1;
+	int d;
 
 	d = va_arg(arg_list, int);
-
-	if (d < 0)
-	{
-		*buffer = '-';
-		digits++;
-
-		if (d == -2147483648)
-		{
-			*(buffer + 1) = '2';
-			digits++;
-			d = 147483648;
-		}
-		else
-			d = -d;
-	}
-
-	copy_d = d;
-
-	while ((copy_d / 10) > 0)
-	{
-		digits++;
-		copy_d /= 10;
-	}
-
-	buffer += digits - 1;
-	print_number(d, buffer);
-
-	return (digits);
+	print_number(d);
 }
 
 /**
  * print_i - prints an integer
  * @arg_list: points to the integer to be printed
- * @buffer: buffer to store the integer
  *
- * Return: number of characters in @buffer
+ * Return: void
  */
-int print_i(va_list arg_list, char *buffer)
+void print_i(va_list arg_list)
 {
-	int i, copy_i, digits = 1;
+	int i;
 
 	i = va_arg(arg_list, int);
-
-	if (i < 0)
-	{
-		*buffer = '-';
-		digits++;
-
-		if (i == -2147483648)
-		{
-			*(buffer + 1) = '2';
-			digits++;
-			i = 147483648;
-		}
-		else
-			i = -i;
-	}
-
-	copy_i = i;
-
-	while ((copy_i / 10) > 0)
-	{
-		digits++;
-		copy_i /= 10;
-	}
-
-	buffer += digits - 1;
-	print_number(i, buffer);
-
-	return (digits);
+	print_number(i);
 }
 
 /**
  * print_s - prints a string
  * @arg_list: points to the string to be printed
- * @buffer: buffer to store the string
  *
- * Return: number of characters stored in @buffer
+ * Return: void
  */
-int print_s(va_list arg_list, char *buffer)
+void print_s(va_list arg_list)
 {
 	char *string;
-	char *null = "(null)";
 	int index;
 
 	string = va_arg(arg_list, char *);
 
-	if (string == NULL)
-	{
-		for (index = 0; *(null + index); index++)
-		{
-			*buffer = *(null + index);
-			buffer++;
-		}
-
-		return (6);
-	}
-
 	for (index = 0; *(string + index); index++)
-	{
-		*buffer = *(string + index);
-		buffer++;
-	}
-
-	return (index);
+		write(1, (string + index), 1);
 }
