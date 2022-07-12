@@ -2,34 +2,48 @@
 
 /**
  * _printf - produces output according to a format
- * @format: character string that describes how the argument
- *          should be printed
+ * @format: character that describes how arg be printed
  *
  * Return: number of chearcters printed
  */
 int _printf(const char *format, ...)
 {
-	int index, ret_value = 0;
+	int index, ret_value, length = 0, add = 1;
+	char *buffer, *buffer_pointer;
 	va_list args;
 
-	va_start(args, format);
+	buffer = malloc(sizeof(char) * 1024);
+	if (buffer == NULL || format == NULL)
+		return (-1);
+	buffer_pointer = buffer;
 
-	for (index = 0; *(format + index) != '\0'; index++)
+	va_start(args, format);
+	for (index = 0; *(format + index); index++)
 	{
 		if (*(format + index) == '%')
 		{
-			index++;
-
-			if (*(format + index) != '%')
+			if (*(format + index + 1) == '\0')
 			{
-				converter(format + index)(args);
+				ret_value = -1;
+				break;
+			}
+			if (converter(format + index + 1))
+			{
+				index++;
+				add = converter(format + index)(args, buffer);
+				length += add;
+				buffer += add;
+				ret_value = length;
 				continue;
 			}
 		}
-
-		write(1, (format + index), 1);
-		ret_value++;
+		*buffer = *(format + index);
+		length++;
+		buffer++;
+		ret_value = length;
 	}
-
+	write(1, buffer_pointer, length);
+	va_end(args);
+	free(buffer_pointer);
 	return (ret_value);
 }
