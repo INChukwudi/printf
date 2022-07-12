@@ -22,5 +22,6 @@ int print_c(va_list arg_list, char *buffer);
 int print_s(va_list arg_list, char *buffer);
 int print_d_i(va_list arg_list, char *buffer);
 int print_percent(va_list arg_list, char *buffer);
+int print_b(va_list arg_list, char *buffer);
 
 #endif /* _MAIN_H_ */

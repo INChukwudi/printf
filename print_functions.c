@@ -111,3 +111,36 @@ int print_s(va_list arg_list, char *buffer)
 
 	return (index);
 }
+
+/**
+ * print_b - converts unsigned integer to binary
+ * @arg_list: points to the integer to be converted
+ * @buffer: buffer to store the binary result in
+ *
+ * Return: number of digits stored
+ */
+int print_b(va_list arg_list, char *buffer)
+{
+	unsigned int num, copy_num, digits = 1;
+
+	num = va_arg(arg_list, unsigned int);
+	copy_num = num;
+
+	while (copy_num / 2)
+	{
+		digits++;
+		copy_num /= 2;
+	}
+
+	buffer += digits - 1;
+
+	while (num / 2)
+	{
+		*buffer = (num % 2) + '0';
+		buffer--;
+		num /= 2;
+	}
+
+	*buffer = (num % 2) + '0';
+	return (digits);
+}
