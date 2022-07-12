@@ -2,12 +2,7 @@
 
 /**
  * _printf - produces output according to a format
-<<<<<<< HEAD
- * @format: character string that describes how the argument
- *          should be printed
-=======
- * @format: character that describes how arg be printed
->>>>>>> parent of 420ccc0... Add files via upload
+ * @format: character that describes how the arg be printed
  *
  * Return: number of chearcters printed
  */
