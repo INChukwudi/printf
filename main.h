@@ -10,7 +10,8 @@
  * @symbol: conversion specifier
  * @f: function pointer to print function that matches @symbol
  */
-typedef struct formatter {
+typedef struct formatter
+{
 	char *symbol;
 	int (*f)(va_list arg_list, char *buffer);
 } formatter_t;
@@ -25,5 +26,7 @@ int print_percent(va_list arg_list, char *buffer);
 int print_b(va_list arg_list, char *buffer);
 int print_r(va_list arg_list, char *buffer);
 int print_r_13(va_list arg_list, char *buffer);
+int print_x(va_list arg_list, char *buffer);
+int print_X(va_list arg_list, char *buffer);
 
 #endif /* _MAIN_H_ */

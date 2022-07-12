@@ -97,3 +97,83 @@ int print_r_13(va_list arg_list, char *buffer)
 	}
 	return (length);
 }
+
+/**
+ * print_x - print unsigned int in hex with lowercase letters
+ * @arg_list: points to the int
+ * @buffer: buffer to store the result
+ *
+ * Return: number of digits in @buffer
+ */
+int print_x(va_list arg_list, char *buffer)
+{
+	unsigned int num, copy_num, digits = 1;
+
+	num = va_arg(arg_list, unsigned int);
+	copy_num = num;
+
+	while (copy_num / 16)
+	{
+		digits++;
+		copy_num /= 16;
+	}
+
+	buffer += digits - 1;
+	while (num / 16)
+	{
+		if ((num % 16) < 10)
+			*buffer = (num % 16) + 48;
+		else
+			*buffer = (num % 16) + 87;
+
+		buffer--;
+		num /= 16;
+	}
+
+	if ((num % 16) <  10)
+		*buffer = (num % 16) + 48;
+	else
+		*buffer = (num % 16) + 87;
+
+	return (digits);
+}
+
+/**
+ * print_X - prints an unsigned int in hex using uppercase
+ * @arg_list: points to the unsigned int
+ * @buffer: buffer that stores the hex result
+ *
+ * Return: number of digits in @buffer
+ */
+int print_X(va_list arg_list, char *buffer)
+{
+	unsigned int num, copy_num, digits = 1;
+
+	num = va_arg(arg_list, unsigned int);
+	copy_num = num;
+
+	while (copy_num / 16)
+	{
+		digits++;
+		copy_num /= 16;
+	}
+
+	buffer += digits - 1;
+	while (num / 16)
+	{
+		if ((num % 16) < 10)
+			*buffer = (num % 16) + 48;
+		else
+			*buffer = (num % 16) + 55;
+
+		buffer--;
+		num /= 16;
+	}
+
+	if ((num % 16) <  10)
+		*buffer = (num % 16) + 48;
+	else
+		*buffer = (num % 16) + 55;
+
+	return (digits);
+}
