@@ -20,11 +20,13 @@ int (*converter(const char *symbol))(va_list list, char *buffer)
 		{"R", print_r_13},
 		{"x", print_x},
 		{"X", print_X},
+		{"u", print_u},
+		{"o", print_o},
 		{NULL, NULL}
 	};
 	int i;
 
-	for (i = 0; i < 11; i++)
+	for (i = 0; i < 13; i++)
 	{
 		if (*symbol == *(func[i].symbol))
 			return (func[i].f);

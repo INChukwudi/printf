@@ -28,5 +28,7 @@ int print_r(va_list arg_list, char *buffer);
 int print_r_13(va_list arg_list, char *buffer);
 int print_x(va_list arg_list, char *buffer);
 int print_X(va_list arg_list, char *buffer);
+int print_o(va_list arg_list, char *buffer);
+int print_u(va_list arg_list, char *buffer);
 
 #endif /* _MAIN_H_ */
